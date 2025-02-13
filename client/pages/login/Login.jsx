@@ -27,7 +27,7 @@ export const Login = ({userState, setUserState}) => {
        
        try {
           const res = await axios.post(
-             "http://localhost:8000/api/user/login",
+             `${import.meta.env.VITE_API_URL}/api/user/login`,
              user,
              {
                 headers: { "Content-Type": "application/json" },

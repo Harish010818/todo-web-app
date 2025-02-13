@@ -10,7 +10,7 @@ const navigate = useNavigate();
 //it will handle logout
 const logoutHandler = async () => {
      try {
-        const res = await axios.get("http://localhost:8000/api/user/logout", {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/user/logout`, {
             withCredentials: true,  // Ye zaroori hai taki cookie backend tak jaye
         })
         

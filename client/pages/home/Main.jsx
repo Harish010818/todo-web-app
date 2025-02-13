@@ -17,7 +17,7 @@ export const Main = () => {
     console.log("jara hai")
     try {
          const res = await axios.post(
-         `http://localhost:8000/api/todo/${ _id }`,
+         `${import.meta.env.VITE_API_URL}/api/todo/${ _id }`,
          {title, description},
          {
           headers: { "Content-Type": "application/json" },
@@ -40,7 +40,7 @@ export const Main = () => {
   //delete todo handler
   const deleteTodoHandler = async(id) => {
     try {
-        await axios.delete(`http://localhost:8000/api/todo/${id}`, {
+        await axios.delete(`${import.meta.env.VITE_API_URL}/api/todo/${id}`, {
           withCredentials: true
        });
 
@@ -62,7 +62,7 @@ export const Main = () => {
   const editTodoHandler=async(id) => {
       try {
           const res = await axios.put(
-          `http://localhost:8000/api/todo/${id}`,
+          `${import.meta.env.VITE_API_URL}/api/todo/${id}`,
            {title, description},
           {
            headers: { "Content-Type": "application/json" },
@@ -89,7 +89,7 @@ export const Main = () => {
  useEffect(() => {
       const fetchTodo = async () => {
             try {
-               const res = await axios.get(`http://localhost:8000/api/todo/${_id}`)
+               const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/todo/${_id}`)
                if(res){
                   const filtered = res.data.todos.filter((todo) => todo.userId == _id);
                   setTodos(filtered); // only active user todos will show  
