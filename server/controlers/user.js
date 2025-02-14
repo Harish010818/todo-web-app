@@ -35,7 +35,7 @@ export const register = async (req, res) => {
         .cookie("token", token, {
             httpOnly: true,    // JavaScript se access na ho (XSS attacks se bachav)
             secure: true,       // Sirf HTTPS pe kaam kare (production ke liye)
-            sameSite: "strict",   // CSRF se bachav
+            sameSite: "none",   // CSRF se bachav
             maxAge: 24 * 60 * 60 * 1000   // 1 din ke liye valid
         })
         .json({
@@ -78,7 +78,7 @@ export const login = async (req, res) => {
         .cookie("token", token, {
             httpOnly: true,    // JavaScript se access na ho (XSS attacks se bachav)
             secure: true,       // Sirf HTTPS pe kaam kare (production ke liye)
-            sameSite: "strict",  // CSRF se bachav
+            sameSite: "none",  // CSRF se bachav
             maxAge: 24 * 60 * 60 * 1000  // 1 din ke liye valid
         })
         .json({message: "Login successfully",  user})
