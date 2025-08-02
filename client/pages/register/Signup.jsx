@@ -1,17 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const Signup = ({setUserState}) => {
+export const Signup = () => {
     const [user, setUser] = useState({
          username : "",
          email : "",
          password : ""      
     })
    
-   const [isLogged, setIsLogged] = useState(false);
-   const [userId, setUserId] = useState(null);
    
    const navigate = useNavigate();
 
@@ -36,9 +34,7 @@ export const Signup = ({setUserState}) => {
           
          if(res){
             alert(res.data.message);
-            setUserState(true);
-            setIsLogged(true);
-            setUserId(res.data.userData._id);
+            navigate("/login")   
          }
          
       } 
@@ -46,13 +42,6 @@ export const Signup = ({setUserState}) => {
            alert(err.response.data.message);
       }
    } 
-   
-   useEffect(() => {
-      if(isLogged){
-         navigate(`/${userId}`); 
-      } 
-      
-   }, [isLogged, navigate]); 
 
    return (         
         <div className="grid justify-center mt-10 space-y-4">

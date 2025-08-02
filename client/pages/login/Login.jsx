@@ -3,10 +3,10 @@ import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-export const Login = ({userState, setUserState}) => {
-   console.log(userState);
+export const Login = ({setUserState}) => {
+
    const [user, setUser] = useState({
-      email : "",
+      identifier : "",
       password : ""      
    })
    
@@ -16,31 +16,30 @@ export const Login = ({userState, setUserState}) => {
    const navigate = useNavigate();
 
    // it will handle changes on login page
-    const changeHandler =(event) => {
+   const changeHandler =(event) => {
          setUser({
-              ...user, [event.target.name] : event.target.value // visit scrimba for while
-         })  
+         ...user, [event.target.name] : event.target.value // visit scrimba for while
+      })  
    }
-  
-    // it will handle login 
-    const loginHandler = async() => {
+   
+   // it will handle login 
+   const loginHandler = async() => {
        
        try {
           const res = await axios.post(
              `${import.meta.env.VITE_API_URL}/api/user/login`,
              user,
-             {
-                headers: { "Content-Type": "application/json" },
-                withCredentials: true
-               }
+              {
+                 headers: { "Content-Type": "application/json" },
+                 withCredentials: true
+              }
             );
             
-            if(res){
+            if(res) {
                alert(res.data.message);
                setUserState(true);
                setIsLogged(true);
                setUserId(res.data.user._id);
-
             }
             
          } 
@@ -56,12 +55,13 @@ export const Login = ({userState, setUserState}) => {
 
    }, [isLogged, navigate])
    
+
    return (         
         <div className="grid justify-center mt-10 space-y-4">
              <span className="font-bold text-2xl">User Login :</span>
              <input 
                 value={user.email}
-                name="email"
+                name="identifier"
                 onChange={changeHandler}  
                 placeholder="Username or Email" 
                 type="text"
@@ -79,7 +79,7 @@ export const Login = ({userState, setUserState}) => {
                 onClick={loginHandler} 
                 className="w-52 bg-gray-400 px-2 py-2"
             >
-          Login</button>
+           Login</button>
           <p>{"Don't have an account "} 
              <span className="text-blue-700 cursor-pointer" 
               onClick={() => navigate("/register")}

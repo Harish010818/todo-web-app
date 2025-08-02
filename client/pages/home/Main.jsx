@@ -14,26 +14,25 @@ export const Main = () => {
 
   //to add todo
   const addTodoHandler = async() => {
-    console.log("jara hai")
     try {
          const res = await axios.post(
          `${import.meta.env.VITE_API_URL}/api/todo/${ _id }`,
-         {title, description},
+          {title, description},
          {
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type" : "application/json" },
           withCredentials: true,
          }
-      );
+    );
      
       if(res){
-        alert(res.data.message);
-        setTodos([...todos, res.data.tododata]);
-        setTitle("");
-        setDescription("");
+         alert(res.data.message);
+         setTodos([...todos, res.data.tododata]);
+         setTitle("");
+         setDescription("");
       } 
         
     } catch(err) {
-       alert(err.response?.data?.message || "Something went wrong");
+        alert(err.response?.data?.message || "Something went wrong");
     }
  };
 
@@ -49,7 +48,7 @@ export const Main = () => {
     } catch (err) {
         alert(err.response?.data?.message || "Error deleting todo");
     }
- };
+};
 
 // edit todo handler
  const invokeToEdit = (todo) => {
@@ -78,7 +77,6 @@ export const Main = () => {
         alert(err.response?.data.message || "Something went wrong")
     }
 
-   
     setTitle("");
     setDescription("");
     setIsEditing(false);
